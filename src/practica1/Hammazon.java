@@ -19,13 +19,13 @@ public class Hammazon extends Suscripcion{
       System.out.println("Hola " + cliente.getNombre() +
                          ", hemos cobrado tu suscripcion de Hammazon Prime.");
 
-    }else if(cliente.getSaldo() < MEMBRESIA_P_HAMMAZON && tipoDeMembresia.equals("Premium")){
+    }else if(cliente.getSaldo() > MEMBRESIA_P_HAMMAZON && tipoDeMembresia.equals("Premium")){
       cliente.setSaldo(cliente.getSaldo() - MEMBRESIA_P_HAMMAZON);
       System.out.println("Hola " + cliente.getNombre() +
                          ", hemos cobrado tu suscripcion de Hammazon Prime.");
 
     }else{
-      System.out.println("Tu saldo es insuficiente para la suscripcion de Hammazon Prime.");
+      System.out.println("Lamentamos que nos dejes en Hammazon Prime, " + cliente.getNombre());
       eliminarSuscriptor(cliente);
     }
   }
