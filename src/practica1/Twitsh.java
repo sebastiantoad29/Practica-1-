@@ -6,27 +6,27 @@ public class Twitsh extends Suscripcion{
   static final int MEMBRESIA_P_TWITSH = 10;
 
   public void cobroTwitsh(Object o, Cliente cliente, String tipoDeMembresia){
+
     if(!(o instanceof Twitsh))
       return;
     if(cliente.getSaldo() < MEMBRESIA_N_TWITSH){
-      System.out.println("No cuentas con el saldo suficiente
-                          para ser usuario de Twitsh, tu suscripción será suspendida.");
+      System.out.println("Estimado " + cliente.getNombre() + ", sentimos decirte que no puedes ser usuario" +
+                         " de Twitsh, por falta de fondos.");
       eliminarSuscriptor(cliente);
 
-    }else if(tipoDeMembresia.equals("premium")){
-      if(cliente.getSaldo() < MEMBRESIA_P_TWITSH){
-        System.out.println("No cuentas con el saldo suficiente
-                            para ser usuario premium de Twitsh, puedes suscribirte
-                            a nuestra membresía normal por un costo de 6 diarios.");
-        eliminarSuscriptor(cliente);
-      }else{
-        cliente.setSaldo(cliente.getSaldo() - MEMBRESIA_P_TWITSH);
-        System.out.println("Hola " + cliente.getNombre() + ", hemos cobrado tu suscripcion de Twitsh.");
-      }
+    }else if(tipoDeMembresia.equals("Normal")){
+      cliente.setSaldo(cliente.getSaldo() - MEMBRESIA_N_TWITSH);
+      System.out.println("Buen dia " + cliente.getNombre() +
+                         ", disfruta un dia mas de tu suscripcion a Twitsh.");
 
-    }else(tipoDeMembresia.equals("normal")){
-      cliente.getSaldo() = cliente.getSaldo() - MEMBRESIA_N_TWITSH;
-      System.out.println("Hola " + cliente.getNombre() + ", hemos cobrado tu suscripcion de Twitsh.");
+    }else if(cliente.getSaldo() > MEMBRESIA_P_TWITSH && tipoDeMembresia.equals("Premium")){
+      cliente.setSaldo(cliente.getSaldo() - MEMBRESIA_P_TWITSH);
+      System.out.println("Buen dia " + cliente.getNombre() +
+                         ", disfruta un dia mas de tu suscripcion a Twitsh.");
+
+    }else{
+      System.out.println("Lamentamos que dejes el servicio de Twitsh," + cliente.getNombre());
+      eliminarSuscriptor(cliente);
     }
   }
 }
